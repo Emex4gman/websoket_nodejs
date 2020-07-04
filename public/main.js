@@ -6,7 +6,7 @@ const newItem = (content) => {
 const messageDiv = document.getElementById('messages')
 
 
-const socket = io.connect("https://5e050ba54288.ngrok.io");
+const socket = io.connect("https://5e050ba54288.ngrok.io?token=123");
 const coedSOcket = io("https://5e050ba54288.ngrok.io/coed");
 coedSOcket.on("coed", (data) => {
   console.log(data, '-from coed');

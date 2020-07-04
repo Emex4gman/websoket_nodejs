@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "bundle": "browserify app.js > public/bundle.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "engine.io-client": "^3.4.3",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "socket.io": "^2.3.0"

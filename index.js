@@ -26,8 +26,28 @@ const server = app.listen(2000, function (req, res) {
 
 const io = _socket(server)
 
-io.use(function (socket, next) {
-  sessionMiddleware(socket.request, socket.request.res, next);
+// io.use(function (socket, next) {
+//   sessionMiddleware(socket.request, socket.request.res, next);
+// });
+// middleware
+const isValid = (token) => {
+  if (token == '123') {
+    return true
+  } else {
+    return false
+  }
+}
+io.use((socket, next) => {
+  let token = socket.handshake.query.token;
+  console.log(socket.handshake.headers['Authorization'])
+
+  if (isValid(token)) {
+    // console.log('success')
+    return next();
+
+  }
+  console.log('fallies')
+  return next(new Error('authentication error'));
 });
 
 // const nsp = io.of('/coed');
