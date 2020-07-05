@@ -2208,10 +2208,15 @@ process.chdir = function (dir) {
 process.umask = function() { return 0; };
 
 },{}],6:[function(require,module,exports){
-var socket = require('engine.io-client')('ws://5e050ba54288.ngrok.io');
+var socket = require('engine.io-client')('ws://localhost');
 socket.on('open', function () {
   socket.on('message', function (data) { });
   socket.on('close', function () { });
+});
+
+socket.on("home", (data) => {
+  console.log(data);
+  // socket.emit("my other event", { my: "dakalkdladladlta" });
 });
 },{"engine.io-client":15}],7:[function(require,module,exports){
 module.exports = after
