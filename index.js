@@ -2,14 +2,13 @@ const express = require("express");
 const app = require("express")();
 const _socket = require('socket.io');
 const session = require('express-session');
-var cors = require('cors')
+const cors = require('cors');
 const ROOMS = {
-  COED: "/code",
-  MALE: '/male',
-  FEMALE: '/female',
-  TRANS: "/transgenger"
+  COED: "code",
+  MALE: 'male',
+  FEMALE: 'female',
 }
-var sessionMiddleware = session({
+const sessionMiddleware = session({
   secret: "keyboard cat",
   saveUninitialized: true,
   resave: false
@@ -30,7 +29,6 @@ const server = app.listen(2000, function (req, res) {
 
 const io = _socket(server)
 io.use(function (socket, next) {
-  socket.request.userId = 1000;
   next()
   // sessionMiddleware(socket.request, socket.request.res, next);
 });
@@ -53,26 +51,36 @@ io.use((socket, next) => {
   return next(new Error('authentication error'));
 });
 
-const nsp = io.of('/coed');
-nsp.on('connection', socket => {
+const coEd = io.of('/coed');
+const maleRoom = io.of('/male');
+const femaleRoom = io.of('/female');
+
+coEd.on('connection', socket => {
   socket.emit('coed', "welcome to code group")
   socket.on("coed", (data) => {
     console.log('coed: ', data);
-    io.sockets.emit("coed", data)
+    coEd.emit("coed", data)
+  });
+  socket.on("coed.typing", (data) => {
+    socket.broadcast.emit('coed.typing', 'someone is typing');
   });
   console.log('someone connected to code');
+});
 
+maleRoom.on('connection', socket => {
+  socket.emit('male', "welcome to male group")
+  socket.on("male", (data) => {
+    console.log('male: ', data);
+    maleRoom.emit("male", data)
+  });
+  socket.on("male.typing", (data) => {
+    socket.broadcast.emit('male.typing', 'someone is typing');
+  });
+  console.log('someone connected to male');
 });
 
 io.on("connection", (socket) => {
-  socket.emit("home", 'home connect');
+  socket.emit('Welcome Home');
   console.log('made connection to', socket.id);
-  socket.on("message", (data) => {
-    console.log('message: ', data);
-    io.sockets.emit("message", data)
-  });
-  socket.on('typing', function (data) {
-    socket.broadcast.emit('typing', 'someone is typing');
-  });
 });
 

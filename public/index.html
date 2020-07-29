@@ -4,19 +4,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="./css.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
   </head>
   <body>
     <!-- <script src="/socket.io/socket.io.js"></script> -->
-
-    <button id="sub">
+    <!-- <button id="sub">
       test
-    </button>
-    <button id="coed">
-      connect to coed
-    </button>
-    <div id="messages"></div>
-    <div id="codemessages"><h1>coed</h1></div>
+    </button> -->
+
+    <!-- <div id="messages"></div> -->
+    <div class="container">
+      <div class="codese">
+        <button id="coed">
+          connect to Code
+        </button>
+        <input type="text" id="inputemessage" />
+        <input type="submit" id="send" placeholder="Submit" />
+
+        <div id="codemessages"><h1>Code</h1></div>
+      </div>
+      <div class="adminse">
+        <button id="male">
+          connect to Admin
+        </button>
+        <input type="text" id="inputemessage2" />
+        <input type="submit" id="send2" placeholder="Submit" />
+        <div id="messages"><h1>Admin</h1></div>
+      </div>
+    </div>
     <!-- <script src="./bundle.js"></script> -->
     <script src="./main.js"></script>
   </body>

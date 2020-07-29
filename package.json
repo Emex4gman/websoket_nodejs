@@ -3,17 +3,26 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "private": false,
+  "engines": {
+    "node": ">=8",
+    "npm": "*"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "bundle": "browserify app.js > public/bundle.js"
+    "bundle": "browserify app.js > public/bundle.js",
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
-  "author": "",
+  "author": "Ibebugwu chukwuemeka",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "engine.io-client": "^3.4.3",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
